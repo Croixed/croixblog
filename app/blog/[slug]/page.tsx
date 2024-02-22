@@ -33,14 +33,18 @@ export default async function BlogArticle({
         </div>
       </h1>
 
-      <Image
-        src={urlFor(data.titleImage).url()}
-        width={800}
-        height={800}
-        alt="title Image"
-        priority
-        className="m-auto mt-8 rounded-lg border"
-      />
+      <div className="relative h-[300px] md:h-[600px]">
+        <Image
+          src={urlFor(data.titleImage).url()}
+          // width={800}
+          // height={800}
+          fill={true}
+          alt="title Image"
+          priority
+          className="m-auto mt-8 rounded-lg border"
+          style={{ objectFit: "cover" }}
+        />
+      </div>
 
       <div className="prose prose-lg prose-green dark:prose-invert m-auto my-12">
         <PortableText value={data.content} />
