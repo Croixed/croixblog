@@ -25,7 +25,7 @@ export default async function BlogArticle({
   return (
     <div className="mt-2">
       <h1>
-        <span className="block text-center text-base font-semibold uppercase tracking-wide text-primary">
+        <span className="mt-4 block text-center text-base font-semibold uppercase tracking-wide text-primary">
           La Croix Blog
         </span>
         <div className="mt-2 text-center text-3xl font-bold leading-8 tracking-tight sm:text-4xl">
@@ -36,17 +36,15 @@ export default async function BlogArticle({
       <div className="relative h-[300px] md:h-[600px]">
         <Image
           src={urlFor(data.titleImage).url()}
-          // width={800}
-          // height={800}
           fill={true}
           alt="title Image"
           priority
-          className="m-auto mt-8 rounded-lg border"
+          className="m-auto mt-8 border md:rounded-lg"
           style={{ objectFit: "cover" }}
         />
       </div>
 
-      <div className="prose prose-lg prose-green dark:prose-invert m-auto my-12">
+      <div className="prose md:prose-lg prose-green dark:prose-invert prose-p:leading-6 m-auto px-4 py-12 md:px-0">
         <PortableText value={data.content} />
       </div>
     </div>

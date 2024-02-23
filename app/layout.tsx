@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
 import Navbar from "./components/Navbar";
+import { Separator } from "@/components/ui/separator";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,18 +20,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-
-      <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {/* inside of the navbar comp we give it the same margins and paddings  */}
-            <Navbar />
-            <main className="max-w-4xl mx-auto px-4">{children}</main>
-          </ThemeProvider>    
-        </body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {/* inside of the navbar comp we give it the same margins and paddings  */}
+          <Navbar />
+          <Separator />
+          <main className="mx-auto max-w-4xl md:px-4">{children}</main>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

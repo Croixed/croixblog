@@ -3,6 +3,7 @@ import { blogCard } from "./lib/interface";
 import { client, urlFor } from "./lib/sanity";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 
 async function getData() {
@@ -23,31 +24,55 @@ export default async function Home() {
 
   console.log(data);
   return (
-    <div className="my-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-      {/* should probably use a better key than an iterator? */}
-      {data.map((post, idx) => (
-        <Card className="flex flex-col" key={idx}>
-          <Image
-            src={urlFor(post.titleImage).url()}
-            alt="image"
-            width={600}
-            height={600}
-            className="h-[200px] rounded-t-lg object-cover"
-          />
-          <CardContent className="mt-5 flex-grow">
-            <div className="flex h-full flex-col justify-between">
-              <h3 className="line-clamp-2 text-lg font-bold">{post.title}</h3>
-              <p className="mt-2 line-clamp-3 text-sm text-gray-600 dark:text-gray-300">
-                {post.smallDescription}
-              </p>
-              <div className="flex-grow"></div>
-              <Button asChild className="mt-2 w-full">
-                <Link href={`/blog/${post.currentSlug}`}>Read More...</Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
+    <>
+      <p className="pl-4 pt-4 uppercase md:pl-0">Recent Posts</p>
+      <div className="my-5 grid grid-cols-1 gap-1 md:gap-5">
+        {/* should probably use a better key than an iterator? */}
+        {data.map((post, idx) => (
+          <>
+            <Card
+              className="flex flex-col border-none bg-background shadow-none md:flex-row"
+              key={idx}
+            >
+              <div className="relative h-60 w-screen flex-shrink-0 md:h-60 md:w-60">
+                <Image
+                  src={urlFor(post.titleImage).url()}
+                  alt="image"
+                  // width={600}
+                  // height={600}
+                  fill={true}
+                  className="object-cover md:h-[200px]"
+                />
+              </div>
+              <CardContent className="m-3 flex-grow p-0">
+                <div className="flex h-full flex-col justify-between">
+                  <h3 className="line-clamp-2 text-3xl font-bold">
+                    {post.title}
+                  </h3>
+                  <p className="text-md my-4 line-clamp-3 font-serif text-gray-600 dark:text-gray-400 md:my-0">
+                    {post.smallDescription}
+                  </p>
+                  <Button
+                    variant="link"
+                    asChild
+                    className="m-0 h-6 w-min p-0 text-lg font-bold uppercase"
+                  >
+                    <Link href={`/blog/${post.currentSlug}`} className="">
+                      Read More
+                    </Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+            {/* <div className="">
+
+            </div> */}
+            {idx !== data.length - 1 ? (
+              <Separator className="hidden md:block" />
+            ) : null}
+          </>
+        ))}
+      </div>
+    </>
   );
 }
