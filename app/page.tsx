@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+import Featured from "./components/Featured";
 
 export const revalidate = 40;
 
@@ -27,7 +28,9 @@ export default async function Home() {
   console.log(data);
   return (
     <>
-      <p className="pl-4 pt-4 uppercase md:pl-0">Recent Posts</p>
+      <p className="pl-4 pt-4 font-bold uppercase md:pl-0">Featured</p>
+      <Featured data={data} />
+      <p className="pl-4 pt-4 font-bold uppercase md:pl-0">Latest</p>
       <div className="my-5 grid grid-cols-1 gap-1 md:gap-5">
         {/* should probably use a better key than an iterator? */}
         {data.map((post, idx) => (

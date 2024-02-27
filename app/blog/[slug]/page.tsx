@@ -24,6 +24,29 @@ export default async function BlogArticle({
   params: { slug: string };
 }) {
   const data: blogFull = await getData(params.slug);
+
+  // I really ought to extract this
+  const ArticleImage = ({ value }: any) => {
+    // return <img src={urlFor(value).url()} />;
+    return (
+      <div className="relative h-[300px] md:h-[400px]">
+        <Image
+          src={urlFor(value).url()}
+          alt="article image"
+          fill={true}
+          className="md:rounded-md"
+          style={{ objectFit: "cover" }}
+        />
+      </div>
+    );
+  };
+
+  const components = {
+    types: {
+      image: ArticleImage,
+    },
+  };
+
   return (
     <div className="mt-2">
       <h1>
@@ -46,8 +69,8 @@ export default async function BlogArticle({
         />
       </div>
 
-      <div className="prose md:prose-lg prose-green dark:prose-invert prose-p:leading-6 m-auto px-4 py-12 md:px-0">
-        <PortableText value={data.content} />
+      <div className="prose prose-green m-auto px-4 py-12 dark:prose-invert md:prose-lg prose-p:leading-6 md:px-0">
+        <PortableText value={data.content} components={components} />
       </div>
     </div>
   );

@@ -14,12 +14,12 @@ export default {
       title: 'Slug of your blog post',
       options: {
         source: 'title',
-      }
+      },
     },
     {
       name: 'titleImage',
       type: 'image',
-      title: 'Post image'
+      title: 'Post image',
     },
     {
       name: 'smallDescription',
@@ -33,8 +33,11 @@ export default {
       of: [
         {
           type: 'block',
-        }
-      ]
-    }
-  ]
+        },
+        {
+          type: 'image',
+        },
+      ],
+    },
+  ],
 }
