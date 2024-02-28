@@ -11,12 +11,12 @@ export const revalidate = 40;
 
 async function getData() {
   const query = `
-  *[_type == 'blog'] | order(_createdAt desc) [0...3] {
+  *[_type == 'blog'] | order(_createdAt desc) [0...4] {
     title,
     smallDescription,
     "currentSlug": slug.current,
     titleImage,
-    _id
+    _createdAt
   }`;
 
   const data = await client.fetch(query);
@@ -33,19 +33,13 @@ export default async function Home() {
   const data: blogCard[] = await getData();
   const total: number = await client.fetch('count(*[_type == "blog"])');
   // console.log(data);
-  let lastId = data[data.length - 1]._id;
+  let createdAt: string = data[data.length - 1]._createdAt;
   return (
     <>
       <p className="pl-4 pt-4 font-bold uppercase md:pl-0">Featured</p>
       <Featured data={data} />
       <p className="pl-4 pt-4 font-bold uppercase md:pl-0">Latest</p>
-      <HomePosts data={data} lastId={lastId} total={total} />
-      {/* <Button
-        className="m-auto mb-5 font-bold"
-        onClick={() => loadMoreHandler()}
-      >
-        Load More
-      </Button> */}
+      <HomePosts data={data} lastCreated={createdAt} total={total} />
     </>
   );
 }

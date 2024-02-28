@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
 import Navbar from "./components/Navbar";
 import { Separator } from "@/components/ui/separator";
+import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
           <Navbar />
           <Separator />
           <main className="mx-auto max-w-4xl md:px-4">{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

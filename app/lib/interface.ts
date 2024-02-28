@@ -3,7 +3,7 @@ export type blogCard = {
   smallDescription: string;
   currentSlug: string;
   titleImage: any;
-  _id: string;
+  _createdAt: string;
 };
 
 export type blogFull = {

@@ -5,12 +5,13 @@ import { useState } from "react";
 import { client } from "../lib/sanity";
 import { Button } from "@/components/ui/button";
 
-export default function HomePosts({ data, lastId, total }: any) {
+export default function HomePosts({ data, lastCreated, total }: any) {
   const [posts, setPosts] = useState(data); // should probably rename data to initialPosts
 
   const loadMorePosts = async () => {
+    console.log(lastCreated);
     const query = `
-  *[_type == 'blog' && _createdAt < '2024-02-22T01:50:02Z'] | order(_createdAt desc) [0...3] {
+  *[_type == 'blog' && _createdAt < "${lastCreated}"] | order(_createdAt desc) [0...3] {
     title,
     smallDescription,
     "currentSlug": slug.current,
@@ -39,7 +40,7 @@ export default function HomePosts({ data, lastId, total }: any) {
           Load more
         </Button>
       ) : (
-        <p className="m-auto">No more posts!</p>
+        <p className="m-auto font-light">No more posts!</p>
       )}
     </div>
   );
