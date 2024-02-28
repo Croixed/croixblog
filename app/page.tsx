@@ -23,28 +23,23 @@ async function getData() {
   return data;
 }
 
-// async function loadMoreHandler() {
-//   const query = `
-//   *[_type == 'blog' && _id > $lastId] | order(_createdAt desc) [0...3] {
-//     title,
-//     smallDescription,
-//     "currentSlug": slug.current,
-//     titleImage,
-//   }`;
-// }
+async function getTotal() {
+  const query = `count(*[_type == "blog"])`;
+  const total = await client.fetch(query);
+  return total;
+}
 
 export default async function Home() {
   const data: blogCard[] = await getData();
-  // const [currentData, setCurrentData] = useState(data);
-  console.log(data);
-  console.log("testttt");
+  const total: number = await client.fetch('count(*[_type == "blog"])');
+  // console.log(data);
   let lastId = data[data.length - 1]._id;
   return (
     <>
       <p className="pl-4 pt-4 font-bold uppercase md:pl-0">Featured</p>
       <Featured data={data} />
       <p className="pl-4 pt-4 font-bold uppercase md:pl-0">Latest</p>
-      <HomePosts data={data} lastId={lastId} />
+      <HomePosts data={data} lastId={lastId} total={total} />
       {/* <Button
         className="m-auto mb-5 font-bold"
         onClick={() => loadMoreHandler()}
