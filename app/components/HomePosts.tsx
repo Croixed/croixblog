@@ -4,9 +4,10 @@ import HomeCard from "./HomeCard";
 import { useState } from "react";
 import { client } from "../lib/sanity";
 import { Button } from "@/components/ui/button";
+import { blogCard } from "../lib/interface";
 
-export default function HomePosts({ data, lastCreated, total }: any) {
-  const [posts, setPosts] = useState(data); // should probably rename data to initialPosts
+export default function HomePosts({ initialPosts, lastCreated, total }: any) {
+  const [posts, setPosts] = useState(initialPosts); // should probably rename data to initialPosts
 
   const loadMorePosts = async () => {
     console.log(lastCreated);
@@ -24,7 +25,7 @@ export default function HomePosts({ data, lastCreated, total }: any) {
 
   return (
     <div className="my-5 grid grid-cols-1 gap-1 md:gap-5">
-      {posts.map((post: any, idx: any) => (
+      {posts.map((post: blogCard, idx: number) => (
         <>
           <HomeCard post={post} key={post.currentSlug} />
           {idx !== posts.length - 1 ? (

@@ -11,7 +11,7 @@ export const revalidate = 40;
 
 async function getData() {
   const query = `
-  *[_type == 'blog'] | order(_createdAt desc) [0...4] {
+  *[_type == 'blog'] | order(_createdAt desc) [0...5] {
     title,
     smallDescription,
     "currentSlug": slug.current,
@@ -39,7 +39,7 @@ export default async function Home() {
       <p className="pl-4 pt-4 font-bold uppercase md:pl-0">Featured</p>
       <Featured data={data} />
       <p className="pl-4 pt-4 font-bold uppercase md:pl-0">Latest</p>
-      <HomePosts data={data} lastCreated={createdAt} total={total} />
+      <HomePosts initialPosts={data} lastCreated={createdAt} total={total} />
     </>
   );
 }
