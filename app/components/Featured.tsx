@@ -23,6 +23,7 @@ export default function Featured({ data }: FeaturedProps) {
               src={urlFor(item.titleImage).url()}
               alt="image"
               fill={true}
+              priority
               className="object-cover"
             />
           </CardContent>
