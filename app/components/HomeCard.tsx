@@ -32,7 +32,7 @@ export default function HomeCard({ post }: { post: blogCard }) {
               >
                 Read More
               </Button>
-              <p className="h-min text-sm text-gray-500">
+              <p className="h-min text-sm text-gray-600 dark:text-gray-400">
                 {new Date(date[0], date[1] - 1, date[2]).toLocaleString("en", {
                   day: "numeric",
                   month: "long",

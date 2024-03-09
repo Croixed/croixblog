@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { blogCard } from "../lib/interface";
 
 export default function HomePosts({ initialPosts, lastCreated, total }: any) {
-  const [posts, setPosts] = useState(initialPosts); // should probably rename data to initialPosts
+  const [posts, setPosts] = useState(initialPosts);
 
   const loadMorePosts = async () => {
     console.log(lastCreated);
