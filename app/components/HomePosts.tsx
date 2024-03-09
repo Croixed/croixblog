@@ -17,7 +17,7 @@ export default function HomePosts({ initialPosts, lastCreated, total }: any) {
     smallDescription,
     "currentSlug": slug.current,
     titleImage,
-    _id
+    _createdAt
   }`;
     const newPosts = await client.fetch(query);
     setPosts([...posts, ...newPosts]);

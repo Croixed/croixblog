@@ -6,6 +6,8 @@ import Link from "next/link";
 import { blogCard } from "../lib/interface";
 
 export default function HomeCard({ post }: { post: blogCard }) {
+  const date = post._createdAt.split("T")[0].split("-").map(Number);
+
   return (
     <Card className="flex flex-col border-none bg-background shadow-none md:flex-row">
       <div className="relative h-60 w-screen flex-shrink-0 md:h-60 md:w-60">
@@ -23,12 +25,21 @@ export default function HomeCard({ post }: { post: blogCard }) {
             <p className="text-md my-4 line-clamp-3 font-serif text-gray-600 dark:text-gray-400 md:my-0">
               {post.smallDescription}
             </p>
-            <Button
-              variant="link"
-              className="m-0 h-6 w-min p-0 text-lg font-bold uppercase"
-            >
-              Read More
-            </Button>
+            <span className="flex items-center gap-4">
+              <Button
+                variant="link"
+                className="m-0 h-6 w-min p-0 text-lg font-bold uppercase"
+              >
+                Read More
+              </Button>
+              <p className="h-min text-sm text-gray-500">
+                {new Date(date[0], date[1] - 1, date[2]).toLocaleString("en", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </p>
+            </span>
           </div>
         </Link>
       </CardContent>
