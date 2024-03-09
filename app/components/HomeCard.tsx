@@ -16,6 +16,7 @@ export default function HomeCard({ post }: { post: blogCard }) {
           alt="image"
           fill={true}
           className="object-cover md:h-[200px]"
+          quality={50}
         />
       </div>
       <CardContent className="m-3 flex-grow p-0">

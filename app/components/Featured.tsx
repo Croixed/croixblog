@@ -25,6 +25,7 @@ export default function Featured({ data }: FeaturedProps) {
               fill={true}
               priority
               className="object-cover"
+              quality={40}
             />
           </CardContent>
           <CardHeader className="absolute bottom-0 left-0 flex min-h-24 w-full flex-col-reverse bg-gradient-to-t from-black from-5% to-transparent p-2">
